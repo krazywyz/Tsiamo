@@ -50,14 +50,15 @@ footer{padding:2rem;text-align:center;color:#777;font-size:.9rem}
 </head>
 <body>
 
-<!-- Intro -->
+<!-- Intro overlay: inline onclick ensures the button triggers immediately -->
 <div id="intro" style="position:fixed;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:1.2rem;background:var(--ink);z-index:9999">
   <div style="font-family:'Cormorant Garamond',serif;color:var(--gold);letter-spacing:.3em;text-transform:uppercase">for the moments that made us</div>
   <div style="font-family:'Playfair Display',serif;color:var(--cream);font-style:italic;font-size:2.4rem">For Enhle</div>
-  <button id="openBtn" style="padding:.8rem 1.6rem;border-radius:999px;border:1.5px solid var(--gold);background:transparent;color:var(--gold);cursor:pointer">Open</button>
+  <!-- FIXED: inline onclick calls openSite() directly -->
+  <button id="openBtn" onclick="openSite()" style="padding:.8rem 1.6rem;border-radius:999px;border:1.5px solid var(--gold);background:transparent;color:var(--gold);cursor:pointer">Open</button>
 </div>
 
-<!-- Music player UI (uses YouTube iframe API; plays after user taps Play) -->
+<!-- Music player UI (YouTube-based) -->
 <div class="music-player" id="music-player" style="display:none">
   <div style="display:flex;gap:.6rem;align-items:center">
     <div class="music-dots" aria-hidden="true"><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
@@ -71,19 +72,17 @@ footer{padding:2rem;text-align:center;color:#777;font-size:.9rem}
   </div>
 </div>
 
-<!-- Hidden YouTube iframe placeholder (API will create the player here) -->
+<!-- Place where the hidden YT player will be created -->
 <div id="yt-player" style="display:none"></div>
 
 <main id="main-content" style="opacity:0;pointer-events:none;transition:opacity .4s">
 
-  <!-- HERO -->
   <section class="section" id="hero">
     <div class="section-label">To my girl</div>
     <h1 class="hero-title">Our Story — A Letter and the Moments Between Us</h1>
     <p class="hero-sub">A small place where I keep our nights, our letters, the moments that mattered, and everything I love about you.</p>
   </section>
 
-  <!-- LETTER -->
   <section id="letter" class="section">
     <div class="section-label">A letter — from Calvin</div>
     <div class="letter-box" id="typed-letter" aria-live="polite"></div>
@@ -93,7 +92,6 @@ footer{padding:2rem;text-align:center;color:#777;font-size:.9rem}
     </div>
   </section>
 
-  <!-- SINCE / COUNTDOWN -->
   <section id="since" class="section" style="background:#fff0f2;border-top:1px solid rgba(0,0,0,.02);border-bottom:1px solid rgba(0,0,0,.02)">
     <div class="section-label">Since the beginning</div>
     <h2 class="section-title">Every second since we first said hey</h2>
@@ -106,13 +104,11 @@ footer{padding:2rem;text-align:center;color:#777;font-size:.9rem}
     <div style="text-align:center;margin-top:1rem;color:#6b4a4a">And every single one reminds me how much you mean to me.</div>
   </section>
 
-  <!-- TIMELINE (updated using your narrative) -->
   <section id="timeline" class="section">
     <div class="section-label">Key moments</div>
     <div id="timeline-list"></div>
   </section>
 
-  <!-- DISTANCE / MAP (fixed numbers you gave) -->
   <section id="distance" class="section">
     <h2 class="section-title">Where we are</h2>
     <p style="text-align:center;margin-bottom:.6rem">Enhle: Mpumalanga | Calvin: North West (Rustenburg)</p>
@@ -129,30 +125,26 @@ footer{padding:2rem;text-align:center;color:#777;font-size:.9rem}
     </div>
   </section>
 
-  <!-- WHAT I LOVE (reasons integrated from your message) -->
   <section id="love" class="section" style="background:var(--ink);color:var(--cream)">
     <div class="section-label">What I love</div>
     <h2 style="font-family:'Cormorant Garamond',serif;font-size:2rem;color:var(--cream);text-align:center;margin-bottom:1rem">Reasons I love you</h2>
     <div style="max-width:780px;margin:0 auto;padding:1rem;color:var(--cream);line-height:1.7">
-      <p style="font-size:1.05rem"><strong>Enhle,</strong> you are beautiful inside and out. You're kind, thoughtful, and your eyes—your whole personality—makes me fall in love again and again. I love every little thing about you. This page is my way to show you how much you mean to me.</p>
+      <p style="font-size:1.05rem"><strong>Enhle,</strong> you are beautiful inside and out. You're kind and thoughtful, your eyes and your personality make me fall in love again and again. I love every little thing about you. This page is my way to show you how much you mean to me.</p>
     </div>
   </section>
 
-  <!-- LOVE GRID (thumbnails and modal) -->
   <section class="section">
     <div class="section-label">Moments</div>
     <h2 class="section-title">Our story, in chats & photos</h2>
     <div id="love-list" class="love-grid"></div>
   </section>
 
-  <!-- DAYS SINCE HEYY -->
   <section id="counter" class="section">
     <div class="section-label">Count</div>
     <h2 class="section-title">Days since we said "Heyy" (12 Jan 2026)</h2>
     <div style="font-family:'Cormorant Garamond',serif;font-size:3.6rem;color:var(--rose);text-align:center" id="counter-num">0</div>
   </section>
 
-  <!-- REASONS counter -->
   <section id="reasons" class="section" style="background:#fff6f7">
     <div class="section-label">Reasons I love you</div>
     <h2 class="section-title">This number keeps growing</h2>
@@ -161,21 +153,20 @@ footer{padding:2rem;text-align:center;color:#777;font-size:.9rem}
     <div style="text-align:center;margin-top:1rem"><button id="add-reason-btn" class="map-btn">Add one more reason ✦</button></div>
   </section>
 
-  <!-- QUIZ: slide-style single-question flow (no numbering) -->
   <section id="quiz" class="section">
     <div class="section-label">For fun</div>
     <h2 class="section-title">A little quiz — one question at a time</h2>
     <div class="quiz-card" style="max-width:820px;margin:0 auto">
       <div id="quiz-slide" style="min-height:160px"></div>
       <div style="display:flex;justify-content:center;gap:.6rem;margin-top:1rem">
-        <button id="quiz-next" class="tl-btn">Next</button>
+        <button id="quiz-next" class="tl-btn" disabled>Next</button>
         <button id="quiz-retry" class="tl-btn">Retry</button>
       </div>
       <div id="quiz-result" style="margin-top:1rem;text-align:center;font-weight:700" aria-live="polite"></div>
     </div>
   </section>
 
-  <footer><small>Put your images in images/ and the page will show them. To change the background song, give me the YouTube id you'd prefer.</small></footer>
+  <footer><small>Put your images in images/ (img1.jpg … img10.jpg) and the page will show them. The background song is Superpowers by Daniel Caesar (YouTube).</small></footer>
 </main>
 
 <!-- Chat modal -->
@@ -191,18 +182,15 @@ footer{padding:2rem;text-align:center;color:#777;font-size:.9rem}
 <script src="https://www.youtube.com/iframe_api"></script>
 
 <script>
-/* ===========================
-   Data (updated per your notes)
-   =========================== */
-
-/* Minimal image list — still reference images/img1.jpg ... img10.jpg as before */
+/* -----------------------------
+   Data (keeps your narrative)
+   ----------------------------- */
 const imageFiles = [
   'images/img1.jpg','images/img2.jpg','images/img3.jpg','images/img4.jpg',
   'images/img5.jpg','images/img6.jpg','images/img7.jpg','images/img8.jpg',
   'images/img9.jpg','images/img10.jpg'
 ];
 
-/* Typed letter content (kept and slightly personalized) */
 const letterParagraphs = [
   "Enhle,",
   "On 12 Jan 2026 at 20:02 I typed 'Heyy' and you replied — that small hello started everything. We met on TikTok: I was on a live, your account showed up in viewers, and a month later I followed and texted you. You answered with 'heyy?' and I remember smiling so much.",
@@ -212,42 +200,15 @@ const letterParagraphs = [
   "— Calvin"
 ];
 
-/* Timeline items built from your narrative (no external screenshot text used) */
 const chatMoments = [
-  {
-    id:'m1', date:'12 Jan 2026 — 20:02', title:'Our First Hello', excerpt:'Calvin typed "Heyy" — you replied "heyy?" — the beginning of us.',
-    messages:[{who:'Calvin',time:'20:02',text:'Heyy'},{who:'Enhle',time:'20:12',text:'heyy?'}],
-    img:imageFiles[0]
-  },
-  {
-    id:'m2', date:'21 Jan 2026 — 05:31', title:'Birthday & The Proposal', excerpt:'On her birthday Calvin proposed and sent a long birthday letter.',
-    messages:[{who:'Calvin',time:'05:31',text:"Happy birthday — I wrote something for you that night. Will you be mine?"},{who:'Enhle',time:'05:40',text:'You really wrote this? 😭❤️'}],
-    img:imageFiles[1]
-  },
-  {
-    id:'m3', date:'1 Feb 2026 — 19:58', title:'We made it official', excerpt:'A joking ask became real — the moment things felt like home.',
-    messages:[{who:'Calvin',time:'19:58',text:'Do you wanna be my girlfriend?'},{who:'Enhle',time:'20:06',text:'Am I not? 😭'}],
-    img:imageFiles[2]
-  },
-  {
-    id:'m4', date:'Various', title:'Arguments & Forgiveness', excerpt:'We argued, I apologised, and we forgave each other — growing together.',
-    messages:[{who:'Calvin',time:'—',text:'I\'m sorry. I will do better.'},{who:'Enhle',time:'—',text:'I forgive you. Let\'s learn together.'}],
-    img:imageFiles[3]
-  },
-  {
-    id:'m5', date:'Recently', title:'A hard moment, then home', excerpt:'We broke up briefly; a call and your return brought us back together (sensitive).',
-    sensitive:true,
-    messages:[{who:'Enhle',time:'~03:47',text:'Bye'},{who:'Calvin',time:'04:50',text:'I wrote to you because I love you and I want us to work.'},{who:'Enhle',time:'10:05',text:'I saw your message… I love you more.'}],
-    img:imageFiles[4]
-  },
-  {
-    id:'m6', date:'Ongoing', title:"Why I love you", excerpt:'Your kindness, your eyes, your personality — everything about you.',
-    messages:[{who:'Calvin',time:'—',text:'You are perfect to me.'}],
-    img:imageFiles[5]
-  }
+  { id:'m1', date:'12 Jan 2026 — 20:02', title:'Our First Hello', excerpt:'Calvin typed \"Heyy\" — you replied \"heyy?\" — the beginning of us.', messages:[{who:'Calvin',time:'20:02',text:'Heyy'},{who:'Enhle',time:'20:12',text:'heyy?'}], img:imageFiles[0] },
+  { id:'m2', date:'21 Jan 2026 — 05:31', title:'Birthday & The Proposal', excerpt:'On her birthday Calvin proposed and sent a long birthday letter.', messages:[{who:'Calvin',time:'05:31',text:"Happy birthday — I wrote something for you that night. Will you be mine?"},{who:'Enhle',time:'05:40',text:'You really wrote this? 😭❤️'}], img:imageFiles[1] },
+  { id:'m3', date:'1 Feb 2026 — 19:58', title:'We made it official', excerpt:'A joking ask became real — the moment things felt like home.', messages:[{who:'Calvin',time:'19:58',text:'Do you wanna be my girlfriend?'},{who:'Enhle',time:'20:06',text:'Am I not? 😭'}], img:imageFiles[2] },
+  { id:'m4', date:'Various', title:'Arguments & Forgiveness', excerpt:'We argued, I apologised, and we forgave each other — growing together.', messages:[{who:'Calvin',time:'—',text:"I'm sorry. I will do better."},{who:'Enhle',time:'—',text:"I forgive you. Let's learn together."}], img:imageFiles[3] },
+  { id:'m5', date:'Recently', title:'A hard moment, then home', excerpt:'We broke up briefly; we reconciled later on a call (sensitive).', sensitive:true, messages:[{who:'Enhle',time:'~03:47',text:'Bye'},{who:'Calvin',time:'04:50',text:"I wrote because I love you and I want us to work."},{who:'Enhle',time:'10:05',text:'I saw your message… I love you more.'}], img:imageFiles[4] },
+  { id:'m6', date:'Ongoing', title:"Why I love you", excerpt:'Your kindness, your eyes, your personality — everything about you.', messages:[{who:'Calvin',time:'—',text:'You are perfect to me.'}], img:imageFiles[5] }
 ];
 
-/* Quiz questions (kept but will be shown as slides, no numbering visible) */
 const quizQuestions = [
   { q: "How did I (Calvin) first find you?", options:["TikTok live","Instagram DM","WhatsApp","Facebook"], correct:0 },
   { q: "When did we first start talking?", options:["12 Jan 2026","1 Feb 2026","21 Jan 2026","14 Feb 2026"], correct:0 },
@@ -256,19 +217,34 @@ const quizQuestions = [
   { q: "How far apart are we (approx)?", options:["382 km / ~4h17m","100 km","600 km","50 km"], correct:0 }
 ];
 
-/* ===========================
-   Initialization & UI logic
-   =========================== */
+/* -----------------------------
+   Page initialization & logic
+   ----------------------------- */
 
-let showSensitive = false; // single global flag
+let showSensitive = false;
+let countdownInterval = null;
+let quizIndex = 0;
+let quizAnswers = [];
+
+/* Ensure button works even if scripts load early/late:
+   - inline onclick on the button already calls openSite();
+   - the fallback below attaches a handler if needed.
+*/
+(function attachOpenFallback(){
+  const btn = document.getElementById('openBtn');
+  if(!btn) return;
+  btn.addEventListener('click', function(e){
+    // prefer openSite() if present, fallback to hideIntro()
+    if (typeof openSite === 'function') { try{ openSite(); } catch(e){ console.warn(e); } return; }
+    if (typeof hideIntro === 'function') { try{ hideIntro(); } catch(e){ console.warn(e); } return; }
+    // fallback toggle
+    const intro = document.getElementById('intro'), main = document.getElementById('main-content');
+    if (intro && main) { intro.style.display = 'none'; main.style.opacity='1'; main.style.pointerEvents='auto'; }
+  }, false);
+})();
 
 document.addEventListener('DOMContentLoaded', () => {
-  const openBtn = document.getElementById('openBtn');
-  if (openBtn) openBtn.addEventListener('click', openSite);
-  document.getElementById('toggle-sensitive-btn').addEventListener('click', toggleSensitive);
-  document.addEventListener('keydown', (e) => { if (e.key==='h'||e.key==='H') toggleSensitive(); if (e.key==='Escape') closeChat(); });
-
-  // set maps button
+  // maps link
   const mapsBtn = document.getElementById('open-maps-btn');
   if (mapsBtn) {
     const origin = encodeURIComponent('Mpumalanga, South Africa');
@@ -276,42 +252,41 @@ document.addEventListener('DOMContentLoaded', () => {
     mapsBtn.href = `https://www.google.com/maps/dir/?api=1&origin=${origin}&destination=${dest}&travelmode=driving`;
   }
 
-  // quiz controls
-  document.getElementById('quiz-next').addEventListener('click', onQuizNext);
-  document.getElementById('quiz-retry').addEventListener('click', () => { quizIndex = 0; quizAnswers = []; renderQuizSlide(); document.getElementById('quiz-result').textContent=''; });
-
+  document.getElementById('toggle-sensitive-btn').addEventListener('click', toggleSensitive);
+  document.getElementById('quiz-next').addEventListener('click', ()=>{ /* disabled; slide advances on choice */ });
+  document.getElementById('quiz-retry').addEventListener('click', ()=>{ quizIndex=0; quizAnswers=[]; renderQuizSlide(); document.getElementById('quiz-result').textContent=''; });
 });
 
-/* Show main content */
-function openSite() {
-  document.getElementById('intro').style.display = 'none';
-  document.getElementById('main-content').style.opacity = '1';
-  document.getElementById('main-content').style.pointerEvents = 'auto';
+/* page opener - called from button */
+function openSite(){
+  const intro = document.getElementById('intro');
+  const main = document.getElementById('main-content');
+  if (intro) intro.style.display = 'none';
+  if (main) { main.style.opacity = '1'; main.style.pointerEvents = 'auto'; }
   init();
 }
 
-/* Initialize page components */
-function init() {
+/* initialization */
+function init(){
   typeLetter();
   renderTimeline();
   renderLoveGrid();
   updateCounter();
-  // countdown since May 1 2026 by default (you can change)
-  startCountdown('2026-05-01T00:00:00');
+  startCountdown('2026-05-01T00:00:00'); // adjust if you want a different May date
   initReasons();
   renderQuizSlide();
-  initMusic(); // sets up YouTube player and play/pause
+  initMusic();
 }
 
-/* Type letter once */
-function typeLetter() {
+/* typed letter */
+function typeLetter(){
   const el = document.getElementById('typed-letter');
-  if (!el) return;
+  if(!el) return;
   let pi=0, ci=0;
-  function step() {
-    if (pi >= letterParagraphs.length) return;
+  function step(){
+    if(pi >= letterParagraphs.length) return;
     const line = letterParagraphs[pi];
-    if (ci <= line.length) {
+    if(ci <= line.length){
       const before = letterParagraphs.slice(0, pi).join('\n\n');
       el.textContent = (before ? before + '\n\n' : '') + line.slice(0, ci);
       ci++;
@@ -321,11 +296,10 @@ function typeLetter() {
   step();
 }
 
-/* Countdown (elapsed since target) */
-let countdownInterval = null;
-function startCountdown(targetIso) {
+/* countdown (elapsed since target) */
+function startCountdown(targetIso){
   const target = new Date(targetIso);
-  function update() {
+  function update(){
     const now = new Date();
     let diff = Math.max(0, Math.floor((now - target)/1000));
     const days = Math.floor(diff / (3600*24)); diff %= (3600*24);
@@ -337,16 +311,17 @@ function startCountdown(targetIso) {
     document.getElementById('cd-seconds').textContent = String(seconds).padStart(2,'0');
   }
   update();
-  if (countdownInterval) clearInterval(countdownInterval);
+  if(countdownInterval) clearInterval(countdownInterval);
   countdownInterval = setInterval(update, 1000);
 }
 
-/* Timeline render */
-function renderTimeline() {
-  const list = document.getElementById('timeline-list'); list.innerHTML = '';
-  chatMoments.forEach(m => {
+/* timeline render */
+function renderTimeline(){
+  const list = document.getElementById('timeline-list'); list.innerHTML='';
+  chatMoments.forEach(m=>{
     const hidden = m.sensitive && !showSensitive;
     const item = document.createElement('div'); item.className='tl-item';
     item.innerHTML = `<div class="tl-date">${escapeHtml(m.date)}</div>
       <div class="tl-title">${escapeHtml(m.title)}</div>
-      <div class="tl-excerpt" id="excerpt-${m.id}">${hidden ? '[Sensitive content hid
+      <div class="tl-excerpt" id="excerpt-${m.id}">${hidden ? '[Sensitive content hidden — press H]' : escapeHtml(m.excerpt)}</div>
+      <div style="margin-top:.6rem"><button class="tl-btn" data-id="${
