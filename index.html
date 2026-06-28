@@ -205,7 +205,7 @@ footer { padding: 3rem 2rem; text-align: center; color: #999; font-size: 0.85rem
   <div class="intro-text">for the girl who changed everything</div>
   <div class="intro-name">For Enhle</div>
   <div class="intro-sub">Continue to our story</div>
-  <button class="intro-btn" onclick="dismissIntroOnClick(event)">Enter</button>
+  <button class="intro-btn" id="enterBtn">Enter</button>
 </div>
 
 <!-- MUSIC PLAYER -->
@@ -332,7 +332,6 @@ footer { padding: 3rem 2rem; text-align: center; color: #999; font-size: 0.85rem
 const SENDER = 'Calvin';
 const RECEIVER = 'Enhle';
 let showSensitive = false;
-let quizAnswers = {};
 let musicStarted = false;
 let introShown = true;
 
@@ -365,10 +364,12 @@ const quizQuestions = [
   {q: "When did Calvin officially ask 'Do you wanna be my girlfriend?'", options: ["21 Jan 2026", "14 Feb 2026", "1 Feb 2026", "17 Jun 2026"], correct: 2}
 ];
 
-// BUTTON CLICK HANDLER FROM FIRST HTML - INLINE ONCLICK
-function dismissIntroOnClick(event) {
-  event.preventDefault();
-  dismissIntro();
+// SIMPLE BUTTON CLICK HANDLER
+const enterBtn = document.getElementById('enterBtn');
+if(enterBtn) {
+  enterBtn.addEventListener('click', function() {
+    dismissIntro();
+  });
 }
 
 // FALLBACK SCROLL LISTENER
@@ -424,4 +425,4 @@ function typeLetterOnce() {
   const el = document.getElementById('typed-letter');
   if(!el) return;
   
-  let p
+  let pi = 0, c
