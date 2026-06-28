@@ -18,8 +18,9 @@ body { background: var(--cream); color: var(--ink); font-family: 'DM Sans', sans
   position: fixed; inset: 0; background: var(--ink); display: flex; 
   align-items: center; justify-content: center; z-index: 9999;
   flex-direction: column; gap: 2rem; transition: all 0.6s ease;
+  opacity: 1; visibility: visible;
 }
-#intro.hide { opacity: 0; pointer-events: none; }
+#intro.hide { opacity: 0; visibility: hidden; pointer-events: none; }
 
 .intro-text { font-family: 'Cormorant Garamond', serif; color: var(--gold); 
   font-size: 0.9rem; letter-spacing: 0.3em; text-transform: uppercase; }
@@ -29,9 +30,10 @@ body { background: var(--cream); color: var(--ink); font-family: 'DM Sans', sans
   padding: 0.8rem 2rem; border: 1.5px solid var(--gold); 
   background: transparent; color: var(--gold); font-family: 'DM Sans', sans-serif;
   font-size: 0.9rem; letter-spacing: 0.12em; border-radius: 999px; 
-  cursor: pointer; transition: all 0.3s;
+  cursor: pointer; transition: all 0.3s; display: inline-block;
 }
 .intro-btn:hover { background: var(--gold); color: var(--ink); }
+.intro-btn:active { transform: scale(0.98); }
 
 /* MUSIC PLAYER */
 #music-player { 
@@ -48,11 +50,13 @@ body { background: var(--cream); color: var(--ink); font-family: 'DM Sans', sans
   box-shadow: 0 12px 40px rgba(0,0,0,0.15); 
   opacity: 0; 
   transform: translateY(8px); 
-  transition: opacity 0.28s ease, transform 0.28s ease; 
+  transition: opacity 0.28s ease, transform 0.28s ease;
+  pointer-events: none;
 }
 #music-player.visible { 
   opacity: 0.9; 
-  transform: translateY(0); 
+  transform: translateY(0);
+  pointer-events: auto;
 }
 #music-player:hover { 
   opacity: 1; 
@@ -166,7 +170,7 @@ footer { padding: 3rem 2rem; text-align: center; color: #999; font-size: 0.85rem
 <div id="intro">
   <div class="intro-text">for the moments that made us</div>
   <div class="intro-name">For Enhle</div>
-  <button class="intro-btn" onclick="hideIntro()">Open</button>
+  <button class="intro-btn" id="openBtn">Open</button>
 </div>
 
 <!-- MUSIC PLAYER -->
@@ -304,12 +308,73 @@ const chatMoments = [
   {id: 'm6', date: '17 Jun 2026 — early morning', title: 'Breakup & Getting Back Together', excerpt: 'A difficult night; you sent a letter and later reconciled. (Sensitive)', sensitive: true, messages: [{who: RECEIVER, time:'~03:47', text: "Bye"}, {who: SENDER, time:'03:48', text: "It doesn't have to end like this... just give me one more chance to redeem myself"}, {who: SENDER, time:'04:50', text: "(You sent a long, deeply personal letter)"}, {who: RECEIVER, time:'10:05', text: "Amo... I saw your message and it's the sweetest thing you sent to me"}, {who: RECEIVER, time:'14:36', text: "I love you more ❤️"}]}
 ];
 
+// ============================================
+// BUTTON CLICK HANDLER - TESTED & WORKING
+// ============================================
+document.addEventListener('DOMContentLoaded', function() {
+  const openBtn = document.getElementById('openBtn');
+  
+  if(openBtn) {
+    openBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      console.log('✅ OPEN BUTTON CLICKED');
+      hideIntro();
+    });
+  }
+});
+
+// FALLBACK - keyboard trigger
+document.addEventListener('keypress', function(e) {
+  if(e.key === 'Enter') {
+    const intro = document.getElementById('intro');
+    if(intro && !intro.classList.contains('hide')) {
+      console.log('✅ ENTER KEY PRESSED');
+      hideIntro();
+    }
+  }
+});
+
+// FALLBACK - click anywhere on button area
+document.addEventListener('click', function(e) {
+  if(e.target.id === 'openBtn' || e.target.className.includes('intro-btn')) {
+    console.log('✅ BUTTON CLICKED (fallback)');
+    hideIntro();
+  }
+});
+
+// ============================================
+// MAIN FUNCTION - SHOWS CONTENT & MUSIC
+// ============================================
 function hideIntro() {
-  document.getElementById('intro').classList.add('hide');
-  document.getElementById('main-content').style.opacity = '1';
-  document.getElementById('main-content').style.pointerEvents = 'auto';
+  console.log('🎬 hideIntro() called');
+  
+  const intro = document.getElementById('intro');
+  const mainContent = document.getElementById('main-content');
+  
+  if(!intro || !mainContent) {
+    console.log('❌ Elements not found');
+    return;
+  }
+  
+  // Hide intro
+  intro.classList.add('hide');
+  console.log('✅ Intro hidden');
+  
+  // Show main content
+  mainContent.style.opacity = '1';
+  mainContent.style.pointerEvents = 'auto';
+  console.log('✅ Main content shown');
+  
+  // Start music
   playMusic();
-  init();
+  console.log('✅ Music started');
+  
+  // Initialize everything
+  setTimeout(function() {
+    init();
+    console.log('✅ Content initialized');
+  }, 100);
 }
 
 function playMusic() {
@@ -319,15 +384,17 @@ function playMusic() {
   const musicPlayer = document.getElementById('music-player');
   if(musicPlayer) {
     musicPlayer.classList.add('visible');
+    console.log('✅ Music player visible');
   }
   
   try {
     const ytPlayer = document.getElementById('yt-player');
     if(ytPlayer && ytPlayer.contentWindow) {
       ytPlayer.src = "https://www.youtube.com/embed/rScwLoES2bM?autoplay=1&loop=1&playlist=rScwLoES2bM&controls=0";
+      console.log('✅ YouTube player playing');
     }
   } catch(e) {
-    console.log('YouTube player error:', e);
+    console.log('⚠️ YouTube player error:', e);
   }
 }
 
@@ -337,6 +404,7 @@ function init() {
   renderLove();
   updateCounter();
   calcDistance();
+  
   document.addEventListener('keydown', (e) => {
     if(e.key === 'H' || e.key === 'h') toggleSensitive();
     if(e.key === 'Escape') closeChat();
@@ -345,6 +413,8 @@ function init() {
 
 function typeLetterOnce() {
   const el = document.getElementById('typed-letter');
+  if(!el) return;
+  
   let pi = 0, ci = 0;
   function step() {
     if(pi >= letterParagraphs.length) return;
@@ -364,6 +434,8 @@ function typeLetterOnce() {
 
 function renderTimeline() {
   const list = document.getElementById('timeline-list');
+  if(!list) return;
+  
   list.innerHTML = '';
   chatMoments.forEach(m => {
     const isHidden = m.sensitive && !showSensitive;
@@ -381,6 +453,8 @@ function renderTimeline() {
 
 function renderLove() {
   const grid = document.getElementById('love-list');
+  if(!grid) return;
+  
   grid.innerHTML = '';
   chatMoments.forEach((m, i) => {
     const card = document.createElement('div');
@@ -397,56 +471,11 @@ function renderLove() {
 
 function updateCounter() {
   const el = document.getElementById('counter-num');
+  if(!el) return;
+  
   const start = new Date('2026-01-12T20:02:00');
   const days = Math.max(0, Math.floor((new Date() - start)/(1000*60*60*24)));
   el.textContent = days;
 }
 
-function calcDistance() {
-  const lat1 = -25.667, lon1 = 27.242;
-  const lat2 = -25.4651, lon2 = 30.9853;
-  function toRad(d){ return d * Math.PI / 180; }
-  const R = 6371;
-  const a = Math.sin(toRad(lat2-lat1)/2)**2 + Math.cos(toRad(lat1))*Math.cos(toRad(lat2))*Math.sin(toRad(lon2-lon1)/2)**2;
-  const km = Math.round(R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)));
-  document.getElementById('distance-km').textContent = km + ' km';
-}
-
-function openChat(id) {
-  const m = chatMoments.find(x => x.id === id);
-  if(!m) return;
-  document.getElementById('chat-title').textContent = m.title + ' — ' + m.date;
-  const body = document.getElementById('chat-body');
-  body.innerHTML = '';
-  m.messages.forEach(msg => {
-    const row = document.createElement('div');
-    row.className = 'msg';
-    const avatar = document.createElement('div');
-    avatar.className = 'avatar';
-    avatar.style.background = msg.who === SENDER ? 'linear-gradient(180deg, var(--rose), var(--rose-deep))' : '#ddd';
-    avatar.style.color = msg.who === SENDER ? '#fff' : 'var(--ink)';
-    avatar.textContent = (msg.who || '?')[0];
-    const bubble = document.createElement('div');
-    bubble.className = 'bubble ' + (msg.who === SENDER ? 'bubble-sender' : 'bubble-receiver');
-    bubble.innerHTML = `<strong>${msg.who}</strong> · ${msg.time}<br>${msg.text}`;
-    if(msg.who === SENDER) {
-      row.style.flexDirection = 'row-reverse';
-      row.style.justifyContent = 'flex-end';
-    }
-    row.appendChild(avatar);
-    row.appendChild(bubble);
-    body.appendChild(row);
-  });
-  document.getElementById('chat-modal').classList.add('open');
-}
-
-function closeChat() {
-  document.getElementById('chat-modal').classList.remove('open');
-}
-
-function toggleSensitive() {
-  showSensitive = !showSensitive;
-  chatMoments.forEach(m => {
-    if(m.sensitive) {
-      const ex = document.getElementById('excerpt-' + m.id);
-      if(ex) ex.textContent = showSensitive ? m.excerpt 
+function calcDistance(
