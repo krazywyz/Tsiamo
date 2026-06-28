@@ -49,9 +49,6 @@ body { background: var(--cream); color: var(--ink); font-family: 'DM Sans', sans
   background: var(--gold); 
   color: var(--ink); 
 }
-.intro-btn:active {
-  transform: scale(0.98);
-}
 
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(20px); }
@@ -176,7 +173,7 @@ body { background: var(--cream); color: var(--ink); font-family: 'DM Sans', sans
 .quiz-option.correct { background: #90EE90; border-color: #228B22; }
 .quiz-option.incorrect { background: #FFB6C6; border-color: #C41E3A; }
 .quiz-submit { padding: 0.8rem 2.5rem; background: var(--rose-deep); color: white; 
-  border: none; border-radius: 6px; cursor: pointer; font-size: 0.95rem; margin-top: 1rem; transition: background 0.3s ease; }
+  border: none; border-radius: 6px; cursor: pointer; font-size: 0.95rem; margin-top: 1rem; }
 .quiz-submit:hover { background: var(--rose); }
 .quiz-results { text-align: center; margin-top: 2rem; padding: 1.5rem; 
   background: var(--light-pink); border-radius: 10px; }
@@ -208,7 +205,7 @@ footer { padding: 3rem 2rem; text-align: center; color: #999; font-size: 0.85rem
   <div class="intro-text">for the girl who changed everything</div>
   <div class="intro-name">For Enhle</div>
   <div class="intro-sub">Continue to our story</div>
-  <button class="intro-btn" id="continue-btn">Enter</button>
+  <button class="intro-btn" onclick="dismissIntroOnClick(event)">Enter</button>
 </div>
 
 <!-- MUSIC PLAYER -->
@@ -368,48 +365,26 @@ const quizQuestions = [
   {q: "When did Calvin officially ask 'Do you wanna be my girlfriend?'", options: ["21 Jan 2026", "14 Feb 2026", "1 Feb 2026", "17 Jun 2026"], correct: 2}
 ];
 
-// INITIALIZE EVENT LISTENERS IMMEDIATELY
-window.addEventListener('load', function() {
-  console.log('Page loaded - initializing button');
-  
-  const continueBtn = document.getElementById('continue-btn');
-  console.log('Button found:', continueBtn);
-  
-  if(continueBtn) {
-    continueBtn.addEventListener('click', function(e) {
-      console.log('Button clicked!');
-      e.preventDefault();
-      dismissIntro();
-    });
+// BUTTON CLICK HANDLER FROM FIRST HTML - INLINE ONCLICK
+function dismissIntroOnClick(event) {
+  event.preventDefault();
+  dismissIntro();
+}
+
+// FALLBACK SCROLL LISTENER
+document.addEventListener('scroll', function() {
+  if(introShown && window.scrollY > 10) {
+    dismissIntro();
   }
-  
-  // Fallback scroll listener
-  document.addEventListener('scroll', function() {
-    if(introShown && window.scrollY > 10) {
-      console.log('Scroll detected');
-      dismissIntro();
-    }
-  }, { passive: true });
-  
-  console.log('Event listeners attached');
-});
+}, { passive: true });
 
 function dismissIntro() {
-  console.log('dismissIntro called');
-  
-  if(!introShown) {
-    console.log('Intro already dismissed, returning');
-    return;
-  }
-  
+  if(!introShown) return;
   introShown = false;
   
   const intro = document.getElementById('intro');
-  console.log('Intro element:', intro);
-  
   if(intro) {
     intro.classList.add('hidden');
-    console.log('Hidden class added to intro');
   }
   
   playMusic();
@@ -417,7 +392,36 @@ function dismissIntro() {
 }
 
 function playMusic() {
-  console.log('playMusic called');
+  if(musicStarted) return;
+  musicStarted = true;
   
-  if(musicStarted) {
-    console.log('Music already started');
+  const musicPlayer = document.getElementById('music-player');
+  if(musicPlayer) {
+    musicPlayer.classList.add('visible');
+  }
+  
+  try {
+    const ytPlayer = document.getElementById('yt-player');
+    if(ytPlayer && ytPlayer.contentWindow) {
+      ytPlayer.src = "https://www.youtube.com/embed/rScwLoES2bM?autoplay=1&loop=1&playlist=rScwLoES2bM&controls=0";
+    }
+  } catch(e) {
+    console.log('YouTube player error:', e);
+  }
+}
+
+function init() {
+  typeLetterOnce();
+  renderTimeline();
+  renderLove();
+  renderQuiz();
+  updateCounter();
+  calcDistance();
+  setupEventListeners();
+}
+
+function typeLetterOnce() {
+  const el = document.getElementById('typed-letter');
+  if(!el) return;
+  
+  let p
