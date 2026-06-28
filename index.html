@@ -6,322 +6,595 @@
 <title>For Enhle 🌹</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
 <style>
-:root{--cream:#fff6f8;--rose:#ef90a0;--rose-deep:#c64b5b;--ink:#2a1a16;--gold:#d7b891}
-*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);-webkit-font-smoothing:antialiased}
-.section{padding:3rem 1.25rem;max-width:980px;margin:0 auto}
-.section-label{font-size:0.7rem;letter-spacing:0.35em;color:var(--gold);text-transform:uppercase;margin-bottom:1rem}
-.hero-title{font-family:'Cormorant Garamond',serif;font-size:2.4rem;color:var(--rose-deep);text-align:center;margin-bottom:.6rem}
-.hero-sub{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--ink);text-align:center;max-width:760px;margin:0 auto;font-size:1.05rem}
-#letter{background:var(--ink);color:var(--cream);padding-top:2rem;padding-bottom:2rem}
-.letter-box{background:rgba(255,255,255,.03);border:1px solid rgba(214,135,146,.08);border-radius:10px;padding:1.6rem;font-family:'Cormorant Garamond',serif;min-height:240px;white-space:pre-wrap}
-.tl-item{padding:1.2rem 0;border-bottom:1px dashed rgba(198,75,91,.08);text-align:center}
-.tl-date{font-family:'Cormorant Garamond',serif;color:var(--rose-deep);font-size:.9rem}
-.tl-title{font-family:'Cormorant Garamond',serif;color:var(--rose-deep);font-size:1.2rem;margin:.45rem 0}
-.tl-excerpt{color:#5a3a32;margin:.6rem 0;font-size:.95rem}
-.tl-btn{padding:.45rem .9rem;border:1px solid var(--rose-deep);background:transparent;color:var(--rose-deep);border-radius:8px;cursor:pointer}
-.distance-box{display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:center}
-@media(max-width:740px){.distance-box{grid-template-columns:1fr}}
-.distance-value{font-family:'Cormorant Garamond',serif;font-size:1.6rem;color:var(--rose);margin-top:.45rem}
-.map-fallback{text-align:center}
-.map-btn{background:var(--rose);color:#fff;padding:.8rem 1rem;border-radius:10px;border:none;cursor:pointer}
-.love-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem}
-.love-card{background:rgba(255,255,255,.02);border:1px solid rgba(239,144,160,.06);padding:1rem;border-radius:10px;text-align:center;display:flex;flex-direction:column;gap:.6rem}
-.love-thumb{width:100%;height:140px;object-fit:cover;border-radius:8px;background:#f2e6e6}
-.cd-grid{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:1rem}
-.cd-box{background:#fff;padding:1rem;border-radius:12px;min-width:110px;box-shadow:0 10px 30px rgba(0,0,0,.06);text-align:center;font-family:'Cormorant Garamond',serif}
-.cd-num{font-size:2rem;color:var(--rose)}
-.cd-label{font-size:.8rem;color:#7a4f4f;letter-spacing:.08em;text-transform:uppercase;margin-top:.4rem}
-.quiz-card{background:#fff6f7;border-radius:12px;padding:1rem;border:1px solid rgba(198,75,91,.06)}
-.option{display:block;padding:.9rem 1rem;border-radius:10px;border:1px solid rgba(198,75,91,.06);margin-bottom:.6rem;background:#fff;cursor:pointer}
-#chat-modal{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;z-index:2000}
-#chat-modal.open{display:flex}
-.modal-card{background:var(--cream);border-radius:12px;padding:1rem;max-width:780px;width:90%;max-height:85vh;overflow:auto}
-.modal-img{width:100%;object-fit:contain;border-radius:8px;margin-bottom:.8rem}
-.modal-close{float:right;background:none;border:none;font-size:1.25rem;cursor:pointer}
-.music-player{position:fixed;right:1.1rem;bottom:1.1rem;background:var(--ink);color:var(--cream);padding:.6rem .9rem;border-radius:999px;display:flex;gap:.6rem;align-items:center;box-shadow:0 12px 40px rgba(0,0,0,.18);z-index:999}
-.music-dots{display:flex;gap:.3rem;height:14px;align-items:flex-end}
-.dot{width:4px;height:10px;border-radius:2px;background:var(--gold);animation:musicPulse 1.2s infinite}
-.dot:nth-child(2){animation-delay:.12s}.dot:nth-child(3){animation-delay:.24s}.dot:nth-child(4){animation-delay:.36s}
-@keyframes musicPulse{0%,100%{transform:scaleY(.4);opacity:.4}50%{transform:scaleY(1);opacity:1}}
-.play-btn{background:transparent;border:1px solid rgba(255,255,255,.08);color:var(--cream);padding:.45rem .7rem;border-radius:999px;cursor:pointer}
-.small{font-size:.75rem;color:var(--gold)}
-footer{padding:2rem;text-align:center;color:#777;font-size:.9rem}
+  :root{
+    --cream:#fff6f8; --rose:#ef90a0; --rose-deep:#c64b5b;
+    --ink:#2a1a16; --gold:#d7b891;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);-webkit-font-smoothing:antialiased;line-height:1.45}
+  main{max-width:980px;margin:0 auto;padding:24px}
+
+  /* Intro overlay */
+  #intro{
+    position:fixed;inset:0;background:var(--ink);display:flex;flex-direction:column;gap:16px;
+    align-items:center;justify-content:center;color:var(--gold);z-index:9999;padding:24px;text-align:center;
+  }
+  #intro .title{font-family:'Playfair Display',serif;color:#fff;font-size:36px;font-style:italic}
+  #openBtn{padding:10px 20px;border-radius:999px;border:1.5px solid var(--gold);background:transparent;color:var(--gold);cursor:pointer}
+
+  /* Basic sections */
+  .section{padding:32px 0;border-bottom:1px solid rgba(0,0,0,0.03)}
+  .section-label{font-size:12px;letter-spacing:.35em;color:var(--gold);text-transform:uppercase;margin-bottom:12px}
+  .hero-title{font-family:'Cormorant Garamond',serif;font-size:28px;color:var(--rose-deep);margin-bottom:8px;text-align:center}
+  .hero-sub{font-family:'Cormorant Garamond',serif;font-style:italic;text-align:center;color:var(--ink);max-width:760px;margin:0 auto}
+
+  .letter-box{background:var(--ink);color:var(--cream);padding:18px;border-radius:10px;border:1px solid rgba(214,135,146,.08);font-family:'Cormorant Garamond',serif;white-space:pre-wrap;min-height:160px}
+
+  /* timeline */
+  .tl-item{padding:18px 0;border-bottom:1px dashed rgba(198,75,91,.08)}
+  .tl-date{font-family:'Cormorant Garamond',serif;color:var(--rose-deep);font-size:13px}
+  .tl-title{font-family:'Cormorant Garamond',serif;color:var(--rose-deep);font-size:20px;margin:8px 0}
+  .tl-excerpt{color:#5a3a32;font-size:15px}
+  .tl-btn{padding:8px 14px;border-radius:8px;border:1px solid var(--rose-deep);background:transparent;color:var(--rose-deep);cursor:pointer;margin-top:10px}
+
+  /* content warning */
+  .content-warning{background:#fff3f3;border:1px solid #f1c6c6;padding:12px;border-radius:8px;color:#6b2a2a;margin-bottom:10px}
+
+  /* modal */
+  #chat-modal{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;padding:16px;z-index:2000}
+  #chat-modal.open{display:flex}
+  .modal-card{background:var(--cream);border-radius:12px;padding:16px;max-width:820px;width:100%;max-height:86vh;overflow:auto}
+  .modal-close{float:right;background:none;border:none;font-size:20px;cursor:pointer;color:var(--ink)}
+  .modal-img{width:100%;height:auto;border-radius:8px;margin-bottom:12px}
+
+  /* love grid */
+  .love-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:12px}
+  .love-card{background:rgba(255,255,255,.02);border:1px solid rgba(239,144,160,.06);padding:12px;border-radius:10px;text-align:center;display:flex;flex-direction:column;gap:8px}
+  .love-thumb{width:100%;height:140px;object-fit:cover;border-radius:8px;background:#f6eaea}
+
+  /* countdown */
+  .cd-grid{display:flex;gap:12px;justify-content:center;margin-top:12px;flex-wrap:wrap}
+  .cd-box{background:#fff;padding:12px;border-radius:10px;min-width:100px;text-align:center;box-shadow:0 8px 24px rgba(0,0,0,.06)}
+  .cd-num{font-family:'Cormorant Garamond',serif;font-size:28px;color:var(--rose)}
+  .cd-label{font-size:11px;color:#7a4f4f;letter-spacing:.08em;text-transform:uppercase;margin-top:4px}
+
+  /* quiz */
+  .quiz-card{background:#fff6f7;border-radius:12px;padding:12px;border:1px solid rgba(198,75,91,.06)}
+  .option{display:block;padding:12px;border-radius:10px;border:1px solid rgba(198,75,91,.06);background:#fff;margin-bottom:8px;text-align:left;cursor:pointer}
+
+  /* music player */
+  .music-player{position:fixed;right:16px;bottom:16px;background:var(--ink);color:var(--cream);padding:10px 14px;border-radius:999px;display:flex;gap:12px;align-items:center;box-shadow:0 12px 40px rgba(0,0,0,.18);z-index:1500}
+  .music-info{display:flex;flex-direction:column}
+  .music-title{font-weight:600}
+  .music-artist{font-size:12px;color:var(--gold)}
+  .play-btn{padding:8px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.08);background:transparent;color:var(--cream);cursor:pointer}
+  .dot{width:4px;height:10px;border-radius:2px;background:var(--gold);margin-right:3px;animation:musicPulse 1.2s infinite}
+  @keyframes musicPulse{0%,100%{transform:scaleY(.45);opacity:.5}50%{transform:scaleY(1);opacity:1}}
+
+  /* responsive tweaks */
+  @media(max-width:520px){
+    .hero-title{font-size:22px}
+    .letter-box{font-size:15px}
+  }
 </style>
 </head>
 <body>
 
-<!-- Intro overlay: inline onclick ensures the button triggers immediately -->
-<div id="intro" style="position:fixed;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:1.2rem;background:var(--ink);z-index:9999">
-  <div style="font-family:'Cormorant Garamond',serif;color:var(--gold);letter-spacing:.3em;text-transform:uppercase">for the moments that made us</div>
-  <div style="font-family:'Playfair Display',serif;color:var(--cream);font-style:italic;font-size:2.4rem">For Enhle</div>
-  <!-- FIXED: inline onclick calls openSite() directly -->
-  <button id="openBtn" onclick="openSite()" style="padding:.8rem 1.6rem;border-radius:999px;border:1.5px solid var(--gold);background:transparent;color:var(--gold);cursor:pointer">Open</button>
-</div>
-
-<!-- Music player UI (YouTube-based) -->
-<div class="music-player" id="music-player" style="display:none">
-  <div style="display:flex;gap:.6rem;align-items:center">
-    <div class="music-dots" aria-hidden="true"><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
-    <div style="display:flex;flex-direction:column;align-items:flex-start">
-      <div style="font-weight:600" id="music-title">Superpowers</div>
-      <div class="small" id="music-artist">Daniel Caesar</div>
-    </div>
+  <!-- Intro overlay -->
+  <div id="intro" role="dialog" aria-modal="true" aria-label="Intro overlay">
+    <div style="font-family:'Cormorant Garamond',serif;color:var(--gold);letter-spacing:.25em;text-transform:uppercase">for the moments that made us</div>
+    <div class="title">For Enhle</div>
+    <button id="openBtn" onclick="openSite()" aria-label="Open site">Open</button>
   </div>
-  <div style="margin-left:.6rem">
-    <button id="playPauseBtn" class="play-btn">Play</button>
-  </div>
-</div>
 
-<!-- Place where the hidden YT player will be created -->
-<div id="yt-player" style="display:none"></div>
-
-<main id="main-content" style="opacity:0;pointer-events:none;transition:opacity .4s">
-
-  <section class="section" id="hero">
-    <div class="section-label">To my girl</div>
-    <h1 class="hero-title">Our Story — A Letter and the Moments Between Us</h1>
-    <p class="hero-sub">A small place where I keep our nights, our letters, the moments that mattered, and everything I love about you.</p>
-  </section>
-
-  <section id="letter" class="section">
-    <div class="section-label">A letter — from Calvin</div>
-    <div class="letter-box" id="typed-letter" aria-live="polite"></div>
-    <div style="text-align:center;margin-top:.7rem">
-      <small style="color:var(--gold)">— Calvin (Grade 10)</small>
-      <button id="toggle-sensitive-btn" class="tl-btn" style="margin-left:1rem">Show sensitive (H)</button>
-    </div>
-  </section>
-
-  <section id="since" class="section" style="background:#fff0f2;border-top:1px solid rgba(0,0,0,.02);border-bottom:1px solid rgba(0,0,0,.02)">
-    <div class="section-label">Since the beginning</div>
-    <h2 class="section-title">Every second since we first said hey</h2>
-    <div class="cd-grid" aria-hidden="false">
-      <div class="cd-box"><div class="cd-num" id="cd-days">00</div><div class="cd-label">Days</div></div>
-      <div class="cd-box"><div class="cd-num" id="cd-hours">00</div><div class="cd-label">Hours</div></div>
-      <div class="cd-box"><div class="cd-num" id="cd-minutes">00</div><div class="cd-label">Minutes</div></div>
-      <div class="cd-box"><div class="cd-num" id="cd-seconds">00</div><div class="cd-label">Seconds</div></div>
-    </div>
-    <div style="text-align:center;margin-top:1rem;color:#6b4a4a">And every single one reminds me how much you mean to me.</div>
-  </section>
-
-  <section id="timeline" class="section">
-    <div class="section-label">Key moments</div>
-    <div id="timeline-list"></div>
-  </section>
-
-  <section id="distance" class="section">
-    <h2 class="section-title">Where we are</h2>
-    <p style="text-align:center;margin-bottom:.6rem">Enhle: Mpumalanga | Calvin: North West (Rustenburg)</p>
-    <div class="distance-box">
-      <div>
-        <div style="font-weight:600;color:var(--rose-deep)">Distance apart</div>
-        <div class="distance-value" id="distance-km">382 km</div>
-        <small style="color:#5a3a32">Estimated driving time: 4h 17m</small>
-      </div>
-      <div class="map-fallback">
-        <p style="color:#6b4a4a;margin-bottom:.6rem">Open route in Google Maps (new tab)</p>
-        <a id="open-maps-btn" class="map-btn" target="_blank" rel="noopener noreferrer">Open directions</a>
+  <!-- Music Player UI (visible; plays after user interaction) -->
+  <div class="music-player" id="music-player" style="display:none" aria-hidden="false">
+    <div style="display:flex;align-items:center;gap:8px">
+      <div style="display:flex;flex-direction:column;align-items:flex-start" class="music-info">
+        <div class="music-title" id="music-title">Superpowers</div>
+        <div class="music-artist" id="music-artist">Daniel Caesar</div>
       </div>
     </div>
-  </section>
-
-  <section id="love" class="section" style="background:var(--ink);color:var(--cream)">
-    <div class="section-label">What I love</div>
-    <h2 style="font-family:'Cormorant Garamond',serif;font-size:2rem;color:var(--cream);text-align:center;margin-bottom:1rem">Reasons I love you</h2>
-    <div style="max-width:780px;margin:0 auto;padding:1rem;color:var(--cream);line-height:1.7">
-      <p style="font-size:1.05rem"><strong>Enhle,</strong> you are beautiful inside and out. You're kind and thoughtful, your eyes and your personality make me fall in love again and again. I love every little thing about you. This page is my way to show you how much you mean to me.</p>
+    <div style="display:flex;align-items:center;gap:8px">
+      <button id="playPauseBtn" class="play-btn" aria-label="Play or pause">Play</button>
     </div>
-  </section>
-
-  <section class="section">
-    <div class="section-label">Moments</div>
-    <h2 class="section-title">Our story, in chats & photos</h2>
-    <div id="love-list" class="love-grid"></div>
-  </section>
-
-  <section id="counter" class="section">
-    <div class="section-label">Count</div>
-    <h2 class="section-title">Days since we said "Heyy" (12 Jan 2026)</h2>
-    <div style="font-family:'Cormorant Garamond',serif;font-size:3.6rem;color:var(--rose);text-align:center" id="counter-num">0</div>
-  </section>
-
-  <section id="reasons" class="section" style="background:#fff6f7">
-    <div class="section-label">Reasons I love you</div>
-    <h2 class="section-title">This number keeps growing</h2>
-    <div style="font-size:3.2rem;color:var(--rose);text-align:center" id="reasons-count">0</div>
-    <div style="text-align:center;margin-top:.6rem;color:#6b4a4a">and counting...</div>
-    <div style="text-align:center;margin-top:1rem"><button id="add-reason-btn" class="map-btn">Add one more reason ✦</button></div>
-  </section>
-
-  <section id="quiz" class="section">
-    <div class="section-label">For fun</div>
-    <h2 class="section-title">A little quiz — one question at a time</h2>
-    <div class="quiz-card" style="max-width:820px;margin:0 auto">
-      <div id="quiz-slide" style="min-height:160px"></div>
-      <div style="display:flex;justify-content:center;gap:.6rem;margin-top:1rem">
-        <button id="quiz-next" class="tl-btn" disabled>Next</button>
-        <button id="quiz-retry" class="tl-btn">Retry</button>
-      </div>
-      <div id="quiz-result" style="margin-top:1rem;text-align:center;font-weight:700" aria-live="polite"></div>
-    </div>
-  </section>
-
-  <footer><small>Put your images in images/ (img1.jpg … img10.jpg) and the page will show them. The background song is Superpowers by Daniel Caesar (YouTube).</small></footer>
-</main>
-
-<!-- Chat modal -->
-<div id="chat-modal">
-  <div class="modal-card" role="dialog" aria-modal="true">
-    <button class="modal-close" onclick="closeChat()">✕</button>
-    <h3 id="chat-title" style="font-family:'Cormorant Garamond',serif;color:var(--rose-deep);margin-bottom:.4rem"></h3>
-    <div id="chat-body"></div>
   </div>
-</div>
 
-<!-- YouTube iframe API -->
-<script src="https://www.youtube.com/iframe_api"></script>
+  <!-- Hidden YT player container (API creates player here) -->
+  <div id="yt-player" style="display:none"></div>
 
-<script>
-/* -----------------------------
-   Data (keeps your narrative)
-   ----------------------------- */
-const imageFiles = [
-  'images/img1.jpg','images/img2.jpg','images/img3.jpg','images/img4.jpg',
-  'images/img5.jpg','images/img6.jpg','images/img7.jpg','images/img8.jpg',
-  'images/img9.jpg','images/img10.jpg'
-];
+  <main id="main-content" style="opacity:0;pointer-events:none">
 
-const letterParagraphs = [
-  "Enhle,",
-  "On 12 Jan 2026 at 20:02 I typed 'Heyy' and you replied — that small hello started everything. We met on TikTok: I was on a live, your account showed up in viewers, and a month later I followed and texted you. You answered with 'heyy?' and I remember smiling so much.",
-  "On 21 Jan 2026 — your birthday — I proposed to you in my own clumsy, heartfelt way and I sent that birthday letter I kept writing all night. That moment, your warmth and the way you replied, made me know I wanted you.",
-  "We've had our moments — arguments where I made mistakes and had to apologise, breakups that hurt, and the times we chose to forgive and come back together. The most recent time we reconciled on call after you came back from school is one of those days I won't forget.",
-  "You are beautiful inside and out; your kindness, your thoughtfulness, your eyes, your personality — everything about you is perfect to me. I love you so deeply.",
-  "— Calvin"
-];
+    <!-- HERO -->
+    <section class="section" id="hero">
+      <div class="section-label">To my girl</div>
+      <h1 class="hero-title">Our Story — A Letter and the Moments Between Us</h1>
+      <p class="hero-sub">A small place where I keep our nights, our letters, the moments that mattered, and everything I love about you.</p>
+    </section>
 
-const chatMoments = [
-  { id:'m1', date:'12 Jan 2026 — 20:02', title:'Our First Hello', excerpt:'Calvin typed \"Heyy\" — you replied \"heyy?\" — the beginning of us.', messages:[{who:'Calvin',time:'20:02',text:'Heyy'},{who:'Enhle',time:'20:12',text:'heyy?'}], img:imageFiles[0] },
-  { id:'m2', date:'21 Jan 2026 — 05:31', title:'Birthday & The Proposal', excerpt:'On her birthday Calvin proposed and sent a long birthday letter.', messages:[{who:'Calvin',time:'05:31',text:"Happy birthday — I wrote something for you that night. Will you be mine?"},{who:'Enhle',time:'05:40',text:'You really wrote this? 😭❤️'}], img:imageFiles[1] },
-  { id:'m3', date:'1 Feb 2026 — 19:58', title:'We made it official', excerpt:'A joking ask became real — the moment things felt like home.', messages:[{who:'Calvin',time:'19:58',text:'Do you wanna be my girlfriend?'},{who:'Enhle',time:'20:06',text:'Am I not? 😭'}], img:imageFiles[2] },
-  { id:'m4', date:'Various', title:'Arguments & Forgiveness', excerpt:'We argued, I apologised, and we forgave each other — growing together.', messages:[{who:'Calvin',time:'—',text:"I'm sorry. I will do better."},{who:'Enhle',time:'—',text:"I forgive you. Let's learn together."}], img:imageFiles[3] },
-  { id:'m5', date:'Recently', title:'A hard moment, then home', excerpt:'We broke up briefly; we reconciled later on a call (sensitive).', sensitive:true, messages:[{who:'Enhle',time:'~03:47',text:'Bye'},{who:'Calvin',time:'04:50',text:"I wrote because I love you and I want us to work."},{who:'Enhle',time:'10:05',text:'I saw your message… I love you more.'}], img:imageFiles[4] },
-  { id:'m6', date:'Ongoing', title:"Why I love you", excerpt:'Your kindness, your eyes, your personality — everything about you.', messages:[{who:'Calvin',time:'—',text:'You are perfect to me.'}], img:imageFiles[5] }
-];
+    <!-- LETTER -->
+    <section class="section" id="letter">
+      <div class="section-label">A letter — from Calvin</div>
+      <div class="letter-box" id="typed-letter" aria-live="polite"></div>
+      <div style="text-align:center;margin-top:10px">
+        <small style="color:var(--gold)">— Calvin (Grade 10)</small>
+        <button id="toggle-sensitive-btn" class="tl-btn" style="margin-left:10px">Show sensitive (H)</button>
+      </div>
+    </section>
 
-const quizQuestions = [
-  { q: "How did I (Calvin) first find you?", options:["TikTok live","Instagram DM","WhatsApp","Facebook"], correct:0 },
-  { q: "When did we first start talking?", options:["12 Jan 2026","1 Feb 2026","21 Jan 2026","14 Feb 2026"], correct:0 },
-  { q: "What did I do on 21 Jan 2026?", options:["Sent a birthday letter & proposed","Broke up","Moved cities","Made a mixtape"], correct:0 },
-  { q: "Where do you (Enhle) live?", options:["Mpumalanga","Rustenburg","Cape Town","Johannesburg"], correct:0 },
-  { q: "How far apart are we (approx)?", options:["382 km / ~4h17m","100 km","600 km","50 km"], correct:0 }
-];
+    <!-- COUNTDOWN -->
+    <section class="section" id="since">
+      <div class="section-label">Since the beginning</div>
+      <h2 class="hero-title" style="font-size:20px;margin-bottom:6px">Every second since we first said hey</h2>
+      <div class="cd-grid" role="status" aria-live="polite">
+        <div class="cd-box"><div class="cd-num" id="cd-days">00</div><div class="cd-label">Days</div></div>
+        <div class="cd-box"><div class="cd-num" id="cd-hours">00</div><div class="cd-label">Hours</div></div>
+        <div class="cd-box"><div class="cd-num" id="cd-minutes">00</div><div class="cd-label">Minutes</div></div>
+        <div class="cd-box"><div class="cd-num" id="cd-seconds">00</div><div class="cd-label">Seconds</div></div>
+      </div>
+      <div style="text-align:center;margin-top:12px;color:#6b4a4a">And every single one reminds me how much you mean to me.</div>
+    </section>
 
-/* -----------------------------
-   Page initialization & logic
-   ----------------------------- */
+    <!-- TIMELINE (static display + "Open conversation" buttons) -->
+    <section class="section" id="timeline">
+      <div class="section-label">Key moments</div>
 
-let showSensitive = false;
-let countdownInterval = null;
-let quizIndex = 0;
-let quizAnswers = [];
+      <!-- The First Text -->
+      <div class="tl-item">
+        <div class="tl-date">12 Jan 2026 — 20:02</div>
+        <div class="tl-title">The First Text</div>
+        <div class="tl-excerpt">
+          20:02 — You sent: "Heyy"<br>
+          20:12 — Enhle replied: "Heyyyy" (10 minutes later — and fun fact: she actually said "Heyyyy" with enthusiasm)<br>
+          You two went on to talk until after midnight on the very first night, keeping her company while she was unplaiting her braids.
+        </div>
+        <div><button class="tl-btn" onclick="openChat('first-text')">Open conversation</button></div>
+      </div>
 
-/* Ensure button works even if scripts load early/late:
-   - inline onclick on the button already calls openSite();
-   - the fallback below attaches a handler if needed.
-*/
-(function attachOpenFallback(){
-  const btn = document.getElementById('openBtn');
-  if(!btn) return;
-  btn.addEventListener('click', function(e){
-    // prefer openSite() if present, fallback to hideIntro()
-    if (typeof openSite === 'function') { try{ openSite(); } catch(e){ console.warn(e); } return; }
-    if (typeof hideIntro === 'function') { try{ hideIntro(); } catch(e){ console.warn(e); } return; }
-    // fallback toggle
-    const intro = document.getElementById('intro'), main = document.getElementById('main-content');
-    if (intro && main) { intro.style.display = 'none'; main.style.opacity='1'; main.style.pointerEvents='auto'; }
-  }, false);
-})();
+      <!-- Her Birthday Letter -->
+      <div class="tl-item">
+        <div class="tl-date">21 Jan 2026 — 05:31</div>
+        <div class="tl-title">Her Birthday Letter</div>
+        <div class="tl-excerpt">
+          05:31 — You sent: "Happy Birthday to the most beautiful, gorgeous, amazing, wonderful, sweet-hearted, caring, one of a kind girl I've ever met. May your day just be as amazing and beautiful as you 💕"<br>
+          05:41 — You apologised: "I'm hella sorry I didn't send it @00:00 😔 I fell asleep writing it"<br>
+          05:35 — She replied: "Aw thank you sm 😭❤️ Don't make me cry now 🥺❤️"<br>
+          05:50 — She said: "Its okay I love it ❤️"
+        </div>
+        <div><button class="tl-btn" onclick="openChat('birthday-letter')">Open conversation</button></div>
+      </div>
 
-document.addEventListener('DOMContentLoaded', () => {
-  // maps link
-  const mapsBtn = document.getElementById('open-maps-btn');
-  if (mapsBtn) {
-    const origin = encodeURIComponent('Mpumalanga, South Africa');
-    const dest = encodeURIComponent('Rustenburg, South Africa');
-    mapsBtn.href = `https://www.google.com/maps/dir/?api=1&origin=${origin}&destination=${dest}&travelmode=driving`;
+      <!-- Let's Make It Official -->
+      <div class="tl-item">
+        <div class="tl-date">21 Jan 2026 — 22:28</div>
+        <div class="tl-title">"Let's Make It Official"</div>
+        <div class="tl-excerpt">
+          22:28 — You said: "Let's make it official 🤷🏾‍♂️"<br>
+          22:29 — She replied: "You want a long distance relationship"
+        </div>
+        <div><button class="tl-btn" onclick="openChat('make-official')">Open conversation</button></div>
+      </div>
+
+      <!-- Official Ask -->
+      <div class="tl-item">
+        <div class="tl-date">1 Feb 2026 — 19:58</div>
+        <div class="tl-title">The Official "Be My Girlfriend?"</div>
+        <div class="tl-excerpt">
+          19:58 — You asked: "Do you wanna be my girlfriend?"<br>
+          20:06 — She replied: "Am I not? What happened to the joke 😭😭😭"<br>
+          20:19 — You said: "Mission successful 💕 You laughed 😭😭"
+        </div>
+        <div><button class="tl-btn" onclick="openChat('official-ask')">Open conversation</button></div>
+      </div>
+
+      <!-- Valentine's -->
+      <div class="tl-item">
+        <div class="tl-date">14 Feb 2026 — 00:02</div>
+        <div class="tl-title">Valentine's Day</div>
+        <div class="tl-excerpt">
+          00:02 — You texted: "Happy Valentine's day to my beautiful, amazing and gorgeous girlfriend 💕❤️"
+        </div>
+        <div><button class="tl-btn" onclick="openChat('valentine')">Open conversation</button></div>
+      </div>
+
+      <!-- Content warning + Breakup (sensitive) -->
+      <div class="tl-item">
+        <div class="tl-date">17 Jun 2026 — early morning</div>
+        <div class="tl-title">The Breakup & Getting Back Together</div>
+        <div class="content-warning">
+          Before diving in — while going through the chat, I came across the moment on June 17th at 3:55 AM where you mentioned not wanting to become suicidal again. I can see that was a really dark and painful night. I'm genuinely glad you and Enhle found your way back to each other, and it sounds like you're in a much better place now — but I just want to check: how are you doing right now, really? If you ever need to talk or want support resources, I'm here. 💙
+          <div style="margin-top:8px;font-weight:700">Content warning: this conversation contains mention of suicidal thoughts. If you are struggling, please contact a trusted person or local emergency services.</div>
+        </div>
+        <div class="tl-excerpt" id="excerpt-breakup">~03:47 — Things escalated on a call and Enhle started saying "Bye", telling you she was going to block you. (Sensitive — press H to reveal)</div>
+        <div><button class="tl-btn" onclick="openChat('breakup')">Open conversation</button></div>
+      </div>
+
+    </section>
+
+    <!-- Distance -->
+    <section class="section" id="distance">
+      <h2 class="hero-title" style="font-size:20px;margin-bottom:8px">Where we are</h2>
+      <p style="text-align:center;margin-bottom:8px">Enhle: Mpumalanga | Calvin: North West (Rustenburg)</p>
+      <div class="distance-box">
+        <div>
+          <div style="font-weight:600;color:var(--rose-deep)">Distance apart</div>
+          <div class="distance-value" id="distance-km">382 km</div>
+          <small style="color:#5a3a32">Estimated driving time: 4h 17m</small>
+        </div>
+        <div class="map-fallback">
+          <p style="color:#6b4a4a;margin-bottom:8px">Open route in Google Maps (new tab)</p>
+          <a id="open-maps-btn" class="map-btn" target="_blank" rel="noopener noreferrer">Open directions</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why I love you -->
+    <section class="section" style="background:var(--ink);color:var(--cream)">
+      <div class="section-label">What I love</div>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--cream);text-align:center;margin-bottom:8px">Reasons I love you</h2>
+      <div style="max-width:780px;margin:0 auto;padding:6px;color:var(--cream)">
+        <p style="font-size:15px">Enhle, you are beautiful inside and out. You're kind and thoughtful; your eyes and your personality make me fall in love again and again. I love every little thing about you — this page is my way to show you how much you mean to me.</p>
+      </div>
+    </section>
+
+    <!-- Moments grid -->
+    <section class="section">
+      <div class="section-label">Moments</div>
+      <h2 class="hero-title" style="font-size:20px">Our story, in chats & photos</h2>
+      <div id="love-list" class="love-grid" aria-live="polite"></div>
+    </section>
+
+    <!-- Days since hey -->
+    <section class="section">
+      <div class="section-label">Count</div>
+      <h2 class="hero-title" style="font-size:20px">Days since we said "Heyy" (12 Jan 2026)</h2>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:36px;color:var(--rose);text-align:center" id="counter-num">0</div>
+    </section>
+
+    <!-- Reasons counter -->
+    <section class="section" style="background:#fff6f7">
+      <div class="section-label">Reasons I love you</div>
+      <h2 class="hero-title" style="font-size:20px">This number keeps growing</h2>
+      <div style="font-size:36px;color:var(--rose);text-align:center" id="reasons-count">0</div>
+      <div style="text-align:center;margin-top:8px;color:#6b4a4a">and counting...</div>
+      <div style="text-align:center;margin-top:12px"><button id="add-reason-btn" class="map-btn">Add one more reason ✦</button></div>
+    </section>
+
+    <!-- Quiz (slide-style) -->
+    <section class="section" id="quiz">
+      <div class="section-label">For fun</div>
+      <h2 class="hero-title" style="font-size:20px">A little quiz — one question at a time</h2>
+      <div class="quiz-card" style="max-width:820px;margin:0 auto">
+        <div id="quiz-slide" style="min-height:140px"></div>
+        <div style="display:flex;justify-content:center;gap:8px;margin-top:12px">
+          <button id="quiz-next" class="tl-btn" disabled>Next</button>
+          <button id="quiz-retry" class="tl-btn">Retry</button>
+        </div>
+        <div id="quiz-result" style="margin-top:12px;text-align:center;font-weight:700" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <footer style="padding:18px 0;text-align:center;color:#666;font-size:13px">Put your images in images/ (img1.jpg … img10.jpg) and the page will show them. Background song: Superpowers — Daniel Caesar (YouTube).</footer>
+
+  </main>
+
+  <!-- Chat modal -->
+  <div id="chat-modal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-card">
+      <button class="modal-close" onclick="closeChat()" aria-label="Close">✕</button>
+      <h3 id="chat-title" style="font-family:'Cormorant Garamond',serif;color:var(--rose-deep)"></h3>
+      <div id="chat-body"></div>
+    </div>
+  </div>
+
+  <!-- YouTube iframe API -->
+  <script src="https://www.youtube.com/iframe_api"></script>
+
+  <script>
+  /*****************************************
+   * Data (exact text you provided)
+   *****************************************/
+  const imageFiles = [
+    'images/img1.jpg','images/img2.jpg','images/img3.jpg','images/img4.jpg',
+    'images/img5.jpg','images/img6.jpg','images/img7.jpg','images/img8.jpg',
+    'images/img9.jpg','images/img10.jpg'
+  ];
+
+  const letterParagraphs = [
+    "Enhle,",
+    "On 12 Jan 2026 at 20:02 I typed 'Heyy' and you replied — that small hello started everything.",
+    "On 21 Jan 2026 — your birthday — I proposed to you in my own clumsy, heartfelt way and I sent that birthday letter I kept writing all night.",
+    "We've had our moments — arguments where I made mistakes and had to apologise, breakups that hurt, and the times we chose to forgive and come back together.",
+    "You are beautiful inside and out; your kindness, your thoughtfulness, your eyes, your personality — everything about you is perfect to me. I love you so deeply.",
+    "— Calvin"
+  ];
+
+  const chatMoments = [
+    {
+      id:'first-text',
+      date:'12 Jan 2026 — 20:02',
+      title:'The First Text',
+      excerpt: `20:02 — You sent: "Heyy"
+20:12 — Enhle replied: "Heyyyy" (10 minutes later — and fun fact: she actually said "Heyyyy" with enthusiasm)
+You two went on to talk until after midnight on the very first night, keeping her company while she was unplaiting her braids.`,
+      messages:[
+        {who:'You',time:'20:02',text:'Heyy'},
+        {who:'Enhle',time:'20:12',text:'Heyyyy'},
+        {who:'You',time:'23:50',text:"I enjoyed keeping you company while you unplaited your braids."}
+      ],
+      img:imageFiles[0]
+    },
+    {
+      id:'birthday-letter',
+      date:'21 Jan 2026 — 05:31',
+      title:'Her Birthday Letter',
+      excerpt: `05:31 — You sent: "Happy Birthday to the most beautiful, gorgeous, amazing, wonderful, sweet-hearted, caring, one of a kind girl I've ever met. May your day just be as amazing and beautiful as you 💕"
+05:41 — You apologised: "I'm hella sorry I didn't send it @00:00 😔 I fell asleep writing it"
+05:35 — She replied: "Aw thank you sm 😭❤️ Don't make me cry now 🥺❤️"
+05:50 — She said: "Its okay I love it ❤️"`,
+      messages:[
+        {who:'You',time:'05:31',text:"Happy Birthday to the most beautiful, gorgeous, amazing, wonderful, sweet-hearted, caring, one of a kind girl I've ever met. May your day just be as amazing and beautiful as you 💕"},
+        {who:'You',time:'05:41',text:"I'm hella sorry I didn't send it @00:00 😔 I fell asleep writing it"},
+        {who:'Enhle',time:'05:35',text:"Aw thank you sm 😭❤️ Don't make me cry now 🥺❤️"},
+        {who:'Enhle',time:'05:50',text:"Its okay I love it ❤️"}
+      ],
+      img:imageFiles[1]
+    },
+    {
+      id:'make-official',
+      date:'21 Jan 2026 — 22:28',
+      title:"Let's Make It Official",
+      excerpt:`22:28 — You said: "Let's make it official 🤷🏾‍♂️"
+22:29 — She replied: "You want a long distance relationship"`,
+      messages:[
+        {who:'You',time:'22:28',text:"Let's make it official 🤷🏾‍♂️"},
+        {who:'Enhle',time:'22:29',text:"You want a long distance relationship"}
+      ],
+      img:imageFiles[2]
+    },
+    {
+      id:'official-ask',
+      date:'1 Feb 2026 — 19:58',
+      title:'The Official "Be My Girlfriend?"',
+      excerpt:`19:58 — You asked: "Do you wanna be my girlfriend?"
+20:06 — She replied: "Am I not? What happened to the joke 😭😭😭"
+20:19 — You said: "Mission successful 💕 You laughed 😭😭"`,
+      messages:[
+        {who:'You',time:'19:58',text:"Do you wanna be my girlfriend?"},
+        {who:'Enhle',time:'20:06',text:"Am I not? What happened to the joke 😭😭😭"},
+        {who:'You',time:'20:19',text:"Mission successful 💕 You laughed 😭😭"}
+      ],
+      img:imageFiles[3]
+    },
+    {
+      id:'valentine',
+      date:'14 Feb 2026 — 00:02',
+      title:"Valentine's Day",
+      excerpt:`00:02 — You texted: "Happy Valentine's day to my beautiful, amazing and gorgeous girlfriend 💕❤️"`,
+      messages:[
+        {who:'You',time:'00:02',text:"Happy Valentine's day to my beautiful, amazing and gorgeous girlfriend 💕❤️"}
+      ],
+      img:imageFiles[4]
+    },
+    {
+      id:'breakup',
+      date:'17 Jun 2026',
+      title:'The Breakup & Getting Back Together',
+      excerpt:`~03:47 — Things escalated on a call and Enhle started saying "Bye", telling you she was going to block you
+03:48–04:04 — You pleaded: "It doesn't have to end like this... just give me one more chance to redeem myself"
+04:50 — You sent her a long, deeply personal letter from your heart while she was away writing her exam
+10:05 — She got back from school and texted: "Amo... I saw your message and it's the sweetest thing you sent to me"
+10:13 — She said: "I js got home btw if you wanna call" — you called
+14:36 — She texted: "I love you more ❤️" — back together ✅`,
+      sensitive:true,
+      messages:[
+        {who:'Enhle',time:'~03:47',text:'Bye'},
+        {who:'You',time:'03:48-04:04',text:"It doesn't have to end like this... just give me one more chance to redeem myself"},
+        {who:'You',time:'04:50',text:"(You sent a long, deeply personal letter from your heart while she was away writing her exam)"},
+        {who:'Enhle',time:'10:05',text:"Amo... I saw your message and it's the sweetest thing you sent to me"},
+        {who:'Enhle',time:'10:13',text:"I js got home btw if you wanna call"},
+        {who:'Enhle',time:'14:36',text:"I love you more ❤️"}
+      ],
+      img:imageFiles[5]
+    },
+    {
+      id:'why-love',
+      date:'Ongoing',
+      title:'Why I love you',
+      excerpt:'Your kindness, your eyes, your personality — everything about you.',
+      messages:[
+        {who:'You',time:'—',text:"You are beautiful inside and out. I love everything about you."}
+      ],
+      img:imageFiles[6]
+    }
+  ];
+
+  const quizQuestions = [
+    { q: "How did I (Calvin) first find you?", options:["TikTok live","Instagram DM","WhatsApp","Facebook"], correct:0 },
+    { q: "When did we first start talking?", options:["12 Jan 2026","1 Feb 2026","21 Jan 2026","14 Feb 2026"], correct:0 },
+    { q: "What did I do on 21 Jan 2026?", options:["Sent a birthday letter & proposed","Broke up","Moved cities","Made a mixtape"], correct:0 },
+    { q: "Where do you (Enhle) live?", options:["Mpumalanga","Rustenburg","Cape Town","Johannesburg"], correct:0 },
+    { q: "How far apart are we (approx)?", options:["382 km / ~4h17m","100 km","600 km","50 km"], correct:0 }
+  ];
+
+  /*****************************************
+   * Simple helpers & UI wiring
+   *****************************************/
+  function escapeHtml(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;'); }
+
+  // typed letter
+  function typeLetter(){
+    const el = document.getElementById('typed-letter'); if(!el) return;
+    let pi=0, ci=0;
+    function step(){
+      if(pi >= letterParagraphs.length) return;
+      const line = letterParagraphs[pi];
+      if(ci <= line.length){
+        const before = letterParagraphs.slice(0, pi).join('\n\n');
+        el.textContent = (before ? before + '\n\n' : '') + line.slice(0, ci);
+        ci++; setTimeout(step, 18 + Math.random()*18);
+      } else { pi++; ci=0; setTimeout(step, 200); }
+    }
+    step();
   }
 
-  document.getElementById('toggle-sensitive-btn').addEventListener('click', toggleSensitive);
-  document.getElementById('quiz-next').addEventListener('click', ()=>{ /* disabled; slide advances on choice */ });
-  document.getElementById('quiz-retry').addEventListener('click', ()=>{ quizIndex=0; quizAnswers=[]; renderQuizSlide(); document.getElementById('quiz-result').textContent=''; });
-});
-
-/* page opener - called from button */
-function openSite(){
-  const intro = document.getElementById('intro');
-  const main = document.getElementById('main-content');
-  if (intro) intro.style.display = 'none';
-  if (main) { main.style.opacity = '1'; main.style.pointerEvents = 'auto'; }
-  init();
-}
-
-/* initialization */
-function init(){
-  typeLetter();
-  renderTimeline();
-  renderLoveGrid();
-  updateCounter();
-  startCountdown('2026-05-01T00:00:00'); // adjust if you want a different May date
-  initReasons();
-  renderQuizSlide();
-  initMusic();
-}
-
-/* typed letter */
-function typeLetter(){
-  const el = document.getElementById('typed-letter');
-  if(!el) return;
-  let pi=0, ci=0;
-  function step(){
-    if(pi >= letterParagraphs.length) return;
-    const line = letterParagraphs[pi];
-    if(ci <= line.length){
-      const before = letterParagraphs.slice(0, pi).join('\n\n');
-      el.textContent = (before ? before + '\n\n' : '') + line.slice(0, ci);
-      ci++;
-      setTimeout(step, 18 + Math.random()*18);
-    } else { pi++; ci=0; setTimeout(step, 220); }
+  // render love grid
+  function renderLoveGrid(){
+    const grid = document.getElementById('love-list'); if(!grid) return;
+    grid.innerHTML = '';
+    chatMoments.forEach((m,i)=>{
+      const card = document.createElement('div'); card.className='love-card';
+      const img = document.createElement('img'); img.className='love-thumb'; img.alt = m.title;
+      img.src = m.img || imageFiles[i] || 'images/coming-soon-placeholder.jpg';
+      img.onerror = ()=> img.src = 'images/coming-soon-placeholder.jpg';
+      card.appendChild(img);
+      const title = document.createElement('div'); title.textContent = m.title; title.style.fontFamily = "'Cormorant Garamond', serif";
+      card.appendChild(title);
+      const date = document.createElement('small'); date.textContent = m.date; date.style.color = 'var(--gold)';
+      card.appendChild(date);
+      const btn = document.createElement('button'); btn.className='tl-btn'; btn.textContent='Open'; btn.style.marginTop='8px';
+      btn.addEventListener('click', ()=> openChat(m.id));
+      card.appendChild(btn);
+      grid.appendChild(card);
+    });
   }
-  step();
-}
 
-/* countdown (elapsed since target) */
-function startCountdown(targetIso){
-  const target = new Date(targetIso);
-  function update(){
-    const now = new Date();
-    let diff = Math.max(0, Math.floor((now - target)/1000));
-    const days = Math.floor(diff / (3600*24)); diff %= (3600*24);
-    const hours = Math.floor(diff/3600); diff %= 3600;
-    const minutes = Math.floor(diff/60); const seconds = diff%60;
-    document.getElementById('cd-days').textContent = String(days).padStart(2,'0');
-    document.getElementById('cd-hours').textContent = String(hours).padStart(2,'0');
-    document.getElementById('cd-minutes').textContent = String(minutes).padStart(2,'0');
-    document.getElementById('cd-seconds').textContent = String(seconds).padStart(2,'0');
+  // open chat modal
+  function openChat(id){
+    const m = chatMoments.find(x=>x.id===id); if(!m) return;
+    const modal = document.getElementById('chat-modal'); const title = document.getElementById('chat-title'); const body = document.getElementById('chat-body');
+    title.textContent = `${m.title} — ${m.date}`; body.innerHTML = '';
+    if(m.img){ const img = document.createElement('img'); img.className='modal-img'; img.src = m.img; img.onerror = ()=> img.style.display='none'; body.appendChild(img); }
+    if(m.sensitive && !showSensitive){ const ph = document.createElement('div'); ph.className='tl-excerpt'; ph.textContent = '[This conversation is sensitive — press H to reveal]'; body.appendChild(ph); }
+    else {
+      m.messages.forEach(msg=>{
+        const row = document.createElement('div'); row.style.display='flex'; row.style.gap='8px'; row.style.margin='8px 0';
+        const avatar = document.createElement('div'); avatar.style.width='44px'; avatar.style.height='44px'; avatar.style.borderRadius='50%'; avatar.style.display='flex'; avatar.style.alignItems='center'; avatar.style.justifyContent='center'; avatar.style.fontWeight='700'; avatar.style.color='#fff'; avatar.style.flexShrink='0'; avatar.style.background = (msg.who==='You' || msg.who==='Calvin') ? 'linear-gradient(180deg,var(--rose),var(--rose-deep))' : '#ddd';
+        avatar.textContent = (msg.who||'?')[0];
+        const bubble = document.createElement('div'); bubble.style.padding='8px 10px'; bubble.style.borderRadius='10px'; bubble.style.maxWidth='76%'; bubble.style.background = (msg.who==='You' || msg.who==='Calvin') ? 'linear-gradient(90deg,#ffeef1,rgba(239,144,160,.04))' : '#fff';
+        bubble.innerHTML = `<strong>${escapeHtml(msg.who)}</strong> · ${escapeHtml(msg.time)}<br>${escapeHtml(msg.text)}`;
+        if(msg.who==='You' || msg.who==='Calvin'){ row.style.flexDirection='row-reverse'; row.style.justifyContent='flex-end'; }
+        row.appendChild(avatar); row.appendChild(bubble); body.appendChild(row);
+      });
+    }
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
   }
-  update();
-  if(countdownInterval) clearInterval(countdownInterval);
-  countdownInterval = setInterval(update, 1000);
-}
 
-/* timeline render */
-function renderTimeline(){
-  const list = document.getElementById('timeline-list'); list.innerHTML='';
-  chatMoments.forEach(m=>{
-    const hidden = m.sensitive && !showSensitive;
-    const item = document.createElement('div'); item.className='tl-item';
-    item.innerHTML = `<div class="tl-date">${escapeHtml(m.date)}</div>
-      <div class="tl-title">${escapeHtml(m.title)}</div>
-      <div class="tl-excerpt" id="excerpt-${m.id}">${hidden ? '[Sensitive content hidden — press H]' : escapeHtml(m.excerpt)}</div>
-      <div style="margin-top:.6rem"><button class="tl-btn" data-id="${
+  function closeChat(){ const modal = document.getElementById('chat-modal'); modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); }
+
+  // toggle sensitive
+  function toggleSensitive(){
+    showSensitive = !showSensitive; const btn = document.getElementById('toggle-sensitive-btn'); if(btn) btn.textContent = showSensitive ? 'Hide sensitive (H)' : 'Show sensitive (H)';
+    const ex = document.getElementById('excerpt-breakup'); if(ex){
+      ex.textContent = showSensitive ? chatMoments.find(x=>x.id==='breakup').excerpt : '~03:47 — Things escalated on a call and Enhle started saying "Bye", telling you she was going to block you. (Sensitive — press H to reveal)';
+    }
+    // if modal is open for sensitive item, re-open to reflect
+    const modal = document.getElementById('chat-modal');
+    if(modal && modal.classList.contains('open')){
+      const currentTitle = document.getElementById('chat-title').textContent || ''; const match = currentTitle.split(' — ')[0];
+      const m = chatMoments.find(x=>x.title === match); if(m) openChat(m.id);
+    }
+  }
+
+  // counter since hey
+  function updateCounter(){ const el = document.getElementById('counter-num'); if(!el) return; const start = new Date('2026-01-12T20:02:00'); const days = Math.max(0, Math.floor((new Date() - start) / (1000*60*60*24))); el.textContent = days; }
+
+  // reasons counter
+  function initReasons(){ const el = document.getElementById('reasons-count'); const btn = document.getElementById('add-reason-btn'); const stored = Number(localStorage.getItem('reasonsCount') || 0); el.textContent = stored || 0; btn.addEventListener('click', ()=>{ const cur = Number(localStorage.getItem('reasonsCount')||0)+1; localStorage.setItem('reasonsCount', cur); el.textContent = cur; }); }
+
+  // quiz slides
+  function renderQuizSlide(){ const slide = document.getElementById('quiz-slide'); slide.innerHTML=''; const q = quizQuestions[quizIndex]; const prompt = document.createElement('div'); prompt.style.fontFamily = "'Cormorant Garamond',serif"; prompt.style.color = 'var(--rose-deep)'; prompt.style.fontSize = '16px'; prompt.style.marginBottom = '8px'; prompt.textContent = q.q; slide.appendChild(prompt); q.options.forEach((opt, oi)=>{ const btn = document.createElement('button'); btn.className='option'; btn.style.display='block'; btn.style.width='100%'; btn.style.textAlign='left'; btn.textContent = opt; btn.addEventListener('click', ()=>{ quizAnswers[quizIndex] = oi; if(quizIndex < quizQuestions.length - 1){ quizIndex++; renderQuizSlide(); } else { finishQuiz(); } }); slide.appendChild(btn); }); document.getElementById('quiz-next').disabled = true; }
+  function finishQuiz(){ let score = 0; quizQuestions.forEach((q,i)=>{ if(quizAnswers[i] === q.correct) score++; }); const res = document.getElementById('quiz-result'); res.textContent = `You scored ${score} / ${quizQuestions.length}. ${score===quizQuestions.length ? 'Perfect — you remember the moments well 💖' : (score>=3 ? 'Great!' : 'Nice!')}`; }
+
+  /*****************************************
+   * YouTube player (Superpowers id)
+   *****************************************/
+  let ytPlayer = null;
+  const ytVideoId = 'rScwLoES2bM'; // Superpowers id
+
+  // Called by YouTube API when ready
+  function onYouTubeIframeAPIReady(){
+    ytPlayer = new YT.Player('yt-player', {
+      height:'0', width:'0', videoId: ytVideoId,
+      playerVars: {'controls':0,'iv_load_policy':3,'rel':0,'modestbranding':1},
+      events: {'onReady': onYTReady, 'onStateChange': onYTStateChange}
+    });
+  }
+
+  function onYTReady(){
+    document.getElementById('music-player').style.display = 'flex';
+    const playBtn = document.getElementById('playPauseBtn');
+    playBtn.addEventListener('click', ()=>{
+      if(!ytPlayer) return;
+      const state = ytPlayer.getPlayerState();
+      if(state === YT.PlayerState.PLAYING || state === YT.PlayerState.BUFFERING) ytPlayer.pauseVideo();
+      else ytPlayer.playVideo();
+    });
+  }
+
+  function onYTStateChange(e){
+    const btn = document.getElementById('playPauseBtn');
+    if(!btn) return;
+    if(e.data === YT.PlayerState.PLAYING) btn.textContent = 'Pause';
+    else btn.textContent = 'Play';
+  }
+
+  // initialize music UI text
+  function initMusic(){ document.getElementById('music-title').textContent = 'Superpowers'; document.getElementById('music-artist').textContent = 'Daniel Caesar'; document.getElementById('music-player').style.display = 'flex'; }
+
+  /*****************************************
+   * Initialization on page show
+   *****************************************/
+  function openSite(){
+    const intro = document.getElementById('intro'); const main = document.getElementById('main-content');
+    if(intro) intro.style.display = 'none';
+    if(main){ main.style.opacity = '1'; main.style.pointerEvents = 'auto'; }
+    // run app init
+    typeLetter(); renderLoveGrid(); updateCounter(); startCountdown('2026-05-01T00:00:00'); initReasons(); renderQuizSlide(); initMusic();
+  }
+
+  // start countdown (elapsed since given date)
+  let countdownInterval = null;
+  function startCountdown(targetIso){
+    const target = new Date(targetIso);
+    function update(){
+      const now = new Date(); let diff = Math.max(0, Math.floor((now - target)/1000));
+      const days = Math.floor(diff / (3600*24)); diff %= (3600*24);
+      const hours = Math.floor(diff/3600); diff %= 3600;
+      const minutes = Math.floor(diff/60); const seconds = diff%60;
+      document.getElementById('cd-days').textContent = String(days).padStart(2,'0');
+      document.getElementById('cd-hours').textContent = String(hours).padStart(2,'0');
+      document.getElementById('cd-minutes').textContent = String(minutes).padStart(2,'0');
+      document.getElementById('cd-seconds').textContent = String(seconds).padStart(2,'0');
+    }
+    update();
+    if(countdownInterval) clearInterval(countdownInterval);
+    countdownInterval = setInterval(update, 1000);
+  }
+
+  // small setup: maps button + DOM handlers
+  document.addEventListener('DOMContentLoaded', ()=>{
+    const mapsBtn = document.getElementById('open-maps-btn');
+    if(mapsBtn){
+      const origin = encodeURIComponent('Mpumalanga, South Africa');
+      const dest = encodeURIComponent('Rustenburg, South Africa');
+      mapsBtn.href = `https://www.google.com/maps/dir/?api=1&origin=${origin}&destination=${dest}&travelmode=driving`;
+    }
+
+    // keyboard H toggles sensitive
+    document.addEventListener('keydown', (e)=>{ if(e.key === 'h' || e.key === 'H') toggleSensitive(); if(e.key === 'Escape') closeChat(); });
+
+    // keep static timeline buttons functional (they call openChat by id)
+    // initialize a small love-grid if you want immediate preview of thumbnails
+    renderLoveGrid();
+
+    // initial counter + distance
+    updateCounter();
+    document.getElementById('distance-km').textContent = '382 km';
+  });
+
+  </script>
+</body>
+</html>
